@@ -90,8 +90,8 @@ impl Load {
     }
 
     pub fn to_ca_vec(&self) -> Vec<u8> {
-        let val = self.ca.clone().into_bytes();
-        val
+        
+        self.ca.clone().into_bytes()
     }
 
     pub fn to_client_cert(&self) -> Vec<rustls::Certificate> {
@@ -115,7 +115,7 @@ impl Load {
         server_session_memory_cache: Option<usize>,
     ) -> Arc<rustls::ServerConfig> {
         let roots = self.to_server_cert();
-        let certs = roots.clone();
+        let certs = roots;
         let mut client_auth_roots = RootCertStore::empty();
 
         client_auth_roots.add_parsable_certificates(&[self.server_cert.as_str().as_bytes().to_vec()]);

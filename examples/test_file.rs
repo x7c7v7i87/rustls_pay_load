@@ -10,7 +10,7 @@ use tokio_rustls::{
 
 pub mod fun;
 
-use rustls_payload::load_file::LoadFile as Load;
+use rustls_pay_load::load_file::LoadFile as Load;
 use fun::{CA_FILE, CLIENT_CERT_FILE, CLIENT_KEY_FILE, SERVER_CERT_FILE, SERVER_KEY_FILE};
 
 pub async fn client(domain: &str) -> ClientTlsStream<TcpStream> {
@@ -28,8 +28,8 @@ pub async fn client(domain: &str) -> ClientTlsStream<TcpStream> {
     let domain = rustls::ServerName::try_from(domain)
         .map_err(|_| io::Error::new(io::ErrorKind::InvalidInput, "invalid dnsname"))
         .unwrap();
-    let stream = connector.connect(domain, stream).await.unwrap();
-    stream
+    
+    connector.connect(domain, stream).await.unwrap()
 }
 
 pub fn server() -> TlsAcceptor {
@@ -38,8 +38,8 @@ pub fn server() -> TlsAcceptor {
     load.server_key = SERVER_KEY_FILE.to_string();
 
     let config = load.configure_server(None);
-    let acceptor = TlsAcceptor::from(config);
-    acceptor
+    
+    TlsAcceptor::from(config)
 }
 
 async fn start_server() {
@@ -53,7 +53,7 @@ async fn start_server() {
 
         let mut buf = [0; 12];
         tls_stream.read(&mut buf).await.unwrap();
-        println!("server: got data: {:?}", buf);
+        println!("server: got data: {buf:?}");
         tls_stream.write(&buf).await.unwrap();
         println!("server: flush the data out");
     });

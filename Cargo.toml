@@ -1,10 +1,10 @@
 [package]
-name = "rustls_payload"
+name = "rustls_pay_load"
 version = "0.1.0"
 authors = ["Andy <x7c7v7i87@gmail.com>"]
 edition = "2021"
-description = "rustls is string or &str and file to payload"
-keywords = ["rustls","string payload","file payload"]
+description = "rustls is string or &str and file to pay load"
+keywords = ["rustls","string pay load","file pay load"]
 categories = ["parsing"]
 readme = "README.md"
 license = "MIT"
@@ -13,7 +13,7 @@ repository = "https://github.com/x7c7v7i87/rustls_payload.git"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [lib]
-name = "rustls_payload"
+name = "rustls_pay_load"
 path = "src/lib.rs"
 
 [dependencies]

@@ -93,8 +93,7 @@ impl LoadFile {
         }
 
         panic!(
-            "no keys found in {:?} (encrypted keys not supported)",
-            filename
+            "no keys found in {filename:?} (encrypted keys not supported)"
         );
     }
 
@@ -106,8 +105,8 @@ impl LoadFile {
     }
 
     pub fn to_ca_vec(&self) -> Vec<u8> {
-        let val = self.ca.clone().into_bytes();
-        val
+        
+        self.ca.clone().into_bytes()
     }
 
     pub fn to_client_cert(&self) -> Vec<rustls::Certificate> {
