@@ -1,0 +1,25 @@
+[package]
+name = "rustls_payload"
+version = "0.1.0"
+authors = ["Andy <x7c7v7i87@gmail.com>"]
+edition = "2021"
+description = "rustls is string or &str and file to payload"
+keywords = ["rustls","string payload","file payload"]
+categories = ["parsing"]
+readme = "README.md"
+license = "MIT"
+repository = "https://github.com/x7c7v7i87/rustls_payload.git"
+
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "rustls_payload"
+path = "src/lib.rs"
+
+[dependencies]
+rustls = "0.20.8"
+rustls-pemfile = "1.0.2"
+
+[dev_dependencies]
+tokio = {version = "1.24.2", features = ["full"]}
+tokio-rustls = "0.23.4"
