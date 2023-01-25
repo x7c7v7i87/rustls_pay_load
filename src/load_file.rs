@@ -92,9 +92,7 @@ impl LoadFile {
             }
         }
 
-        panic!(
-            "no keys found in {filename:?} (encrypted keys not supported)"
-        );
+        panic!("no keys found in {filename:?} (encrypted keys not supported)");
     }
 
     /**
@@ -105,7 +103,6 @@ impl LoadFile {
     }
 
     pub fn to_ca_vec(&self) -> Vec<u8> {
-        
         self.ca.clone().into_bytes()
     }
 
@@ -185,4 +182,15 @@ impl LoadFile {
             .expect("invalid client auth certs/key");
         Arc::new(config)
     }
+
+    pub fn quic_cfg_client(&self) -> Arc<RootCertStore> {
+        let cert_file = File::open(self.ca.as_str()).expect("Cannot open CA file");
+
+        let mut reader = BufReader::new(cert_file);
+
+        let mut root_store = RootCertStore::empty();
+        root_store.add_parsable_certificates(&rustls_pemfile::certs(&mut reader).unwrap());
+        Arc::new(root_store)
+    }
+    
 }
